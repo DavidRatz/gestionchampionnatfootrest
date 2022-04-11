@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:gestionchampionnatfoot
+    username: user
+    password: pass
+  jpa:
+    show-sql: true
+#    hibernate:
+#      ddl-auto: create-drop
+  h2:
+    console:
+      enabled: true
+      path: /h2
