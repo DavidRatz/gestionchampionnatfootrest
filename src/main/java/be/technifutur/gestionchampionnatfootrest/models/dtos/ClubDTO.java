@@ -3,6 +3,7 @@ package be.technifutur.gestionchampionnatfootrest.models.dtos;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import be.technifutur.gestionchampionnatfootrest.models.entities.Championnat;
@@ -13,12 +14,12 @@ import lombok.*;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ClubDTO implements Serializable {
-    private Long id;
-    private String nom;
-    private String pays;
-    private String nomPresident;
-    private String nomStade;
-    private LocalDate dateCreation;
+    private final Long id;
+    private final String nom;
+    private final String pays;
+    private final String nomPresident;
+    private final String nomStade;
+    private final LocalDate dateCreation;
     //private ChampionnatDTO championnat;
     //private List<RencontreDTO> rencontresDomicile;
     //private List<RencontreDTO> rencontresVisiteur;
@@ -30,9 +31,9 @@ public class ClubDTO implements Serializable {
         return new ClubDTO(
                 entity.getId(),
                 entity.getNom(),
+                entity.getPays(),
                 entity.getNomPresident(),
                 entity.getNomStade(),
-                entity.getPays(),
                 entity.getDateCreation()//,
                 // ChampionnatDTO.of(entity.getChampionnat()),
                 // entity.getRencontresDomicile() == null ? null : entity.getRencontresDomicile().stream()
@@ -44,17 +45,40 @@ public class ClubDTO implements Serializable {
         );
     }
 
-    // @Data
-    // public static class ChampionnatDTO{
-    //     public static ChampionnatDTO of(Championnat championnat) {
-    //         return null;
-    //     }
-    // }
+    @Data
+    public static class ChampionnatDTO{
+        private final String nom;
+        private final String saison;
+        private final String nbEquipes;
+        private final String pays;
 
-    // @Data
-    // public static class RencontreDTO{
-    //     public static RencontreDTO of(Rencontre rencontre) {
-    //         return null;
-    //     }
-    // }
+        public static ChampionnatDTO of(Championnat championnat) {
+            if( championnat == null )
+                return null;
+
+            return new ChampionnatDTO(
+                championnat.getNom(),
+                championnat.getSaison(),
+                championnat.getNbEquipes(),
+                championnat.getPays()
+            );
+        }
+    }
+
+    @Data
+    public static class RencontreDTO{
+        private final LocalTime heure;
+        private final int scoreDomicile;
+        private final int scoreVisiteur;
+        public static RencontreDTO of(Rencontre rencontre) {
+            if( rencontre == null )
+                return null;
+
+            return new RencontreDTO(
+                rencontre.getHeure(),
+                rencontre.getScoreDomicile(),
+                rencontre.getScoreVisiteur()
+            );
+        }
+    }
 }
