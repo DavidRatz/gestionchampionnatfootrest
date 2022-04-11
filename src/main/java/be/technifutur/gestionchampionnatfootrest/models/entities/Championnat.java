@@ -26,6 +26,6 @@ public class Championnat {
     private String nbEquipes;
     @Column(nullable = false)
     private String pays;
-    @OneToMany(mappedBy = "championnat", cascade = CascadeType.PERSIST)
-    private List<Club> clubs = new ArrayList<>();
+    // @OneToMany(mappedBy = "championnat", cascade = CascadeType.PERSIST)
+    // private List<Club> clubs = new ArrayList<>();
 }

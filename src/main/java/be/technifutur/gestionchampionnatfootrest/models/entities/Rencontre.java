@@ -26,8 +26,8 @@ public class Rencontre {
     private int scoreVisiteur;
     @ManyToOne
     private Journee journee;
-    @ManyToOne
-    private Club clubDomicile;
-    @ManyToOne
-    private Club clubVisiteur;
+    // @ManyToOne
+    // private Club clubDomicile;
+    // @ManyToOne
+    // private Club clubVisiteur;
 }

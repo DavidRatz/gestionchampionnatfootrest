@@ -1,6 +1,6 @@
 package be.technifutur.gestionchampionnatfootrest.models.entities;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,11 +31,11 @@ public class Club {
     private String nomStade;
     @Column(nullable = false)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date dateCreation;
-    @ManyToOne
-    private Championnat championnat;
-    @OneToMany(mappedBy = "clubDomicile", cascade = CascadeType.PERSIST)
-    private List<Rencontre> rencontresDomicile = new ArrayList<>();
-    @OneToMany(mappedBy = "clubVisiteur", cascade = CascadeType.PERSIST)
-    private List<Rencontre> rencontresVisiteur = new ArrayList<>();
+    private LocalDate dateCreation;
+    // @ManyToOne
+    // private Championnat championnat;
+    // @OneToMany(mappedBy = "clubDomicile", cascade = CascadeType.PERSIST)
+    // private List<Rencontre> rencontresDomicile = new ArrayList<>();
+    // @OneToMany(mappedBy = "clubVisiteur", cascade = CascadeType.PERSIST)
+    // private List<Rencontre> rencontresVisiteur = new ArrayList<>();
 }
