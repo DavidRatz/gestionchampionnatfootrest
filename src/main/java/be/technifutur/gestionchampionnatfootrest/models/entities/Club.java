@@ -16,7 +16,7 @@ import lombok.*;
 @Setter
 @Entity
 @Builder
-@Table(name = "client")
+@Table(name = "club")
 public class Club {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,10 +32,10 @@ public class Club {
     @Column(nullable = false)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate dateCreation;
-    // @ManyToOne
-    // private Championnat championnat;
-    // @OneToMany(mappedBy = "clubDomicile", cascade = CascadeType.PERSIST)
-    // private List<Rencontre> rencontresDomicile = new ArrayList<>();
-    // @OneToMany(mappedBy = "clubVisiteur", cascade = CascadeType.PERSIST)
-    // private List<Rencontre> rencontresVisiteur = new ArrayList<>();
+    @ManyToOne
+    private Championnat championnat;
+    @OneToMany(mappedBy = "clubDomicile", cascade = CascadeType.PERSIST)
+    private List<Rencontre> rencontresDomicile = new ArrayList<>();
+    @OneToMany(mappedBy = "clubVisiteur", cascade = CascadeType.PERSIST)
+    private List<Rencontre> rencontresVisiteur = new ArrayList<>();
 }

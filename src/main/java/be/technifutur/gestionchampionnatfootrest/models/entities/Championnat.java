@@ -23,9 +23,9 @@ public class Championnat {
     @Column(nullable = false)
     private String saison;
     @Column(nullable = false)
-    private String nbEquipes;
+    private int nbEquipes;
     @Column(nullable = false)
     private String pays;
-    // @OneToMany(mappedBy = "championnat", cascade = CascadeType.PERSIST)
-    // private List<Club> clubs = new ArrayList<>();
+    @OneToMany(mappedBy = "championnat", cascade = CascadeType.PERSIST)
+    private List<Club> clubs = new ArrayList<>();
 }

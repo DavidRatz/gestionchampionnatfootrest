@@ -3,6 +3,7 @@ package be.technifutur.gestionchampionnatfootrest.models.dtos;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class ClubDTO implements Serializable {
     private final String nomPresident;
     private final String nomStade;
     private final LocalDate dateCreation;
-    //private ChampionnatDTO championnat;
+    private ChampionnatDTO championnat;
     //private List<RencontreDTO> rencontresDomicile;
     //private List<RencontreDTO> rencontresVisiteur;
 
@@ -30,12 +31,12 @@ public class ClubDTO implements Serializable {
 
         return new ClubDTO(
                 entity.getId(),
-                entity.getNom(),
+                 entity.getNom(),
                 entity.getPays(),
                 entity.getNomPresident(),
                 entity.getNomStade(),
-                entity.getDateCreation()//,
-                // ChampionnatDTO.of(entity.getChampionnat()),
+                entity.getDateCreation(),
+                ChampionnatDTO.of(entity.getChampionnat())//,
                 // entity.getRencontresDomicile() == null ? null : entity.getRencontresDomicile().stream()
                 //         .map(RencontreDTO::of)
                 //         .toList(),
@@ -49,7 +50,7 @@ public class ClubDTO implements Serializable {
     public static class ChampionnatDTO{
         private final String nom;
         private final String saison;
-        private final String nbEquipes;
+        private final int nbEquipes;
         private final String pays;
 
         public static ChampionnatDTO of(Championnat championnat) {
@@ -67,7 +68,7 @@ public class ClubDTO implements Serializable {
 
     @Data
     public static class RencontreDTO{
-        private final LocalTime heure;
+        private final LocalDateTime date;
         private final int scoreDomicile;
         private final int scoreVisiteur;
         public static RencontreDTO of(Rencontre rencontre) {
@@ -75,7 +76,7 @@ public class ClubDTO implements Serializable {
                 return null;
 
             return new RencontreDTO(
-                rencontre.getHeure(),
+                rencontre.getDate(),
                 rencontre.getScoreDomicile(),
                 rencontre.getScoreVisiteur()
             );

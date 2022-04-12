@@ -5,28 +5,27 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import be.technifutur.gestionchampionnatfootrest.data.repo.ClubRepository;
-import be.technifutur.gestionchampionnatfootrest.metiers.services.ClubService;
+import be.technifutur.gestionchampionnatfootrest.data.repo.JourneeRepository;
 import be.technifutur.gestionchampionnatfootrest.metiers.services.GenericService;
-import be.technifutur.gestionchampionnatfootrest.models.dtos.ClubDTO;
+import be.technifutur.gestionchampionnatfootrest.models.dtos.JourneeDTO;
 
 @Service
-public class ClubServiceImpl implements GenericService<ClubDTO>, ClubService {
+public class JourneeServiceImpl implements GenericService<JourneeDTO> {
 
     @Autowired
-    private ClubRepository repository;
+    private JourneeRepository repository;
 
     @Override
-    public ClubDTO getOne(Long id) {
+    public JourneeDTO getOne(Long id) {
         return repository.findById(id)
-                .map(ClubDTO::of)
+                .map(JourneeDTO::of)
                 .orElseThrow();
     }
 
     @Override
-    public List<ClubDTO> getAll() {
+    public List<JourneeDTO> getAll() {
         return repository.findAll().stream()
-                .map(ClubDTO::of)
+                .map(JourneeDTO::of)
                 .toList();
     }
     

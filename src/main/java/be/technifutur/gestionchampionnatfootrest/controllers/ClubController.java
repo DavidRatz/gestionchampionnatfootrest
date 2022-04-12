@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import be.technifutur.gestionchampionnatfootrest.metiers.services.ClubService;
+import be.technifutur.gestionchampionnatfootrest.metiers.services.GenericService;
+import be.technifutur.gestionchampionnatfootrest.metiers.services.impl.ClubServiceImpl;
 import be.technifutur.gestionchampionnatfootrest.models.dtos.ClubDTO;
 
 @RestController
@@ -13,7 +15,7 @@ import be.technifutur.gestionchampionnatfootrest.models.dtos.ClubDTO;
 public class ClubController {
     
     @Autowired
-    private ClubService service;
+    private ClubServiceImpl service;
 
     @GetMapping("/{id}")
     public ClubDTO getOne(@PathVariable Long id){

@@ -1,6 +1,6 @@
 package be.technifutur.gestionchampionnatfootrest.models.entities;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
@@ -20,14 +20,16 @@ public class Rencontre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    @DateTimeFormat(pattern = "HH:MM")
-    private LocalTime heure;
+    @DateTimeFormat(pattern = "dd/MM/YYYY HH:MM")
+    private LocalDateTime date;
+    @Column(nullable = true)
     private int scoreDomicile;
+    @Column(nullable = true)
     private int scoreVisiteur;
     @ManyToOne
     private Journee journee;
-    // @ManyToOne
-    // private Club clubDomicile;
-    // @ManyToOne
-    // private Club clubVisiteur;
+    @ManyToOne
+    private Club clubDomicile;
+    @ManyToOne
+    private Club clubVisiteur;
 }
