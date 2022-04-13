@@ -1,10 +1,13 @@
 package be.technifutur.gestionchampionnatfootrest.utils;
 
 import java.sql.Date;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -99,6 +102,7 @@ public class DatabaseFiller implements InitializingBean {
         int nbJournee = (nbClub-1)*2; //6
         int nbRencontreByJournee = nbClub/2; //2
         int nbRencontre = nbJournee*nbRencontreByJournee; //12
+        int moitieRencontre = (nbJournee / 2);
         List<Journee> lJournees = journeeRepo.findAll();
         
         Journee journee2Insert = null;
@@ -106,25 +110,37 @@ public class DatabaseFiller implements InitializingBean {
 
         int i =0;
 
-        for (int iJournee = 1; iJournee <= nbJournee; iJournee++) {
+        for (int iJournee = 0; iJournee < nbJournee; iJournee++) {
             journee2Insert = Journee.builder()
-                .numero(iJournee)
-                .dateDebut(LocalDate.now().plusDays(i))
-                .dateFin(LocalDate.now().plusDays(i+2))
-                .championnat(championnatRepo.findByPays("Belgique"))
+                .numero(iJournee+1)
+                .dateDebut(LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).plusDays(i))
+                .dateFin(LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).plusDays(i+2))
+                .championnat(championnatRepo.findByPays("Belgique").get())
                 .build();
             journeeRepo.save(journee2Insert);
             i+=7;
-        }
-
-        for (Journee journee : lJournees) {
-            Long id = 0L;
             for (int iRencontreByJournee = 0; iRencontreByJournee < nbRencontreByJournee; iRencontreByJournee++) {
-                rencontre = Rencontre.builder()
-                        .date(LocalDateTime.of(journee.getDateDebut(), LocalTime.of(20, 00)))
-                        .clubDomicile(clubRepo.findById(id).get())
-                        .journee(journee)
+                Long idClubDomicile = Long.valueOf((iJournee + iRencontreByJournee) % (nbClub-1));
+                Long idClubVisiteur = null;
+                if(iRencontreByJournee == 0)
+                    idClubVisiteur = Long.valueOf((nbClub-1));
+                else
+                    idClubVisiteur = Long.valueOf(((nbClub-1) - iRencontreByJournee + iJournee) % (nbClub-1));
+                if (iJournee < moitieRencontre) {
+                    rencontre = Rencontre.builder()
+                        .date(LocalDateTime.of(journeeRepo.findByNumeroAndChampionnat(iJournee+1,1).get().getDateDebut(), LocalTime.of(20, 00)))
+                        .clubDomicile(clubRepo.findById(idClubDomicile+1).get())
+                        .clubVisiteur(clubRepo.findById(idClubVisiteur+1).get())
+                        .journee(journeeRepo.findByNumero(iJournee+1).get())
                         .build();
+                } else {
+                    rencontre = Rencontre.builder()
+                        .date(LocalDateTime.of(journeeRepo.findByNumeroAndChampionnat(iJournee+1,1).get().getDateDebut(), LocalTime.of(20, 00)))
+                        .clubDomicile(clubRepo.findById(idClubVisiteur+1).get())
+                        .clubVisiteur(clubRepo.findById(idClubDomicile+1).get())
+                        .journee(journeeRepo.findByNumero(iJournee+1).get())
+                        .build();
+                }
                 rencontreRepo.save(rencontre);
             }
         }
