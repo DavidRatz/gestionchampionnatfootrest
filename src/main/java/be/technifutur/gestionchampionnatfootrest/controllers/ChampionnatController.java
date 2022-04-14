@@ -2,11 +2,14 @@ package be.technifutur.gestionchampionnatfootrest.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import be.technifutur.gestionchampionnatfootrest.metiers.services.impl.ChampionnatServiceImpl;
 import be.technifutur.gestionchampionnatfootrest.models.dtos.ChampionnatDTO;
+import be.technifutur.gestionchampionnatfootrest.models.forms.ChampionnatForm;
 
 @RestController
 @RequestMapping("/championnat")
@@ -23,5 +26,20 @@ public class ChampionnatController {
     @GetMapping
     public List<ChampionnatDTO> getAll(){
         return service.getAll();
+    }
+
+    @PostMapping("/add")
+    public ChampionnatDTO insertChampionnat(@Valid @RequestBody ChampionnatForm form){
+        return service.insert(form);
+    }
+
+    @PutMapping("/{id}")
+    public ChampionnatDTO updateChampionnat(@PathVariable Long id,@Valid @RequestBody ChampionnatForm form){
+        return service.update(id, form);
+    }
+
+    @DeleteMapping("/{id}")
+    public ChampionnatDTO deleteChampionnat(@PathVariable Long id){
+        return service.delete(id);
     }
 }

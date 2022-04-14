@@ -34,8 +34,8 @@ public class Club {
     private LocalDate dateCreation;
     @ManyToOne
     private Championnat championnat;
-    @OneToMany(mappedBy = "clubDomicile", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "clubDomicile", cascade = CascadeType.REFRESH)
     private List<Rencontre> rencontresDomicile = new ArrayList<>();
-    @OneToMany(mappedBy = "clubVisiteur", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "clubVisiteur", cascade = CascadeType.REFRESH)
     private List<Rencontre> rencontresVisiteur = new ArrayList<>();
 }

@@ -31,7 +31,7 @@ public class RencontreController {
     }
 
     @PatchMapping("/update/{id}")
-    public RencontreDTO update(@Valid @PathVariable Long id, @RequestBody RencontreForm form){
+    public RencontreDTO update(@PathVariable Long id, @Valid @RequestBody RencontreForm form){
         return service.update(id,form);
     }
 }

@@ -59,6 +59,7 @@ public class JourneeDTO implements Serializable {
 
     @Data
     public static class RencontreDTO{
+        private final Long id;
         private final LocalDateTime date;
         private final int scoreDomicile;
         private final int scoreVisiteur;
@@ -70,6 +71,7 @@ public class JourneeDTO implements Serializable {
                 return null;
 
             return new RencontreDTO(
+                rencontre.getId(),
                 rencontre.getDate(),
                 rencontre.getScoreDomicile(),
                 rencontre.getScoreVisiteur(),

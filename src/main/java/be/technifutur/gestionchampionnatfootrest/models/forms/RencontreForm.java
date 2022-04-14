@@ -7,7 +7,6 @@ import org.springframework.validation.annotation.Validated;
 import lombok.*;
 
 @Data
-@Validated
 public class RencontreForm {
     @Min(value= 0, message = "Score plus grand que 0")
     private int scoreDomicile;

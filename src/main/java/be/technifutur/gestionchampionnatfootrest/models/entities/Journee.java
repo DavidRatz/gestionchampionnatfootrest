@@ -32,6 +32,6 @@ public class Journee {
     private LocalDate dateFin;
     @ManyToOne
     private Championnat championnat;
-    @OneToMany(mappedBy = "journee", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "journee", cascade = CascadeType.REFRESH)
     private List<Rencontre> rencontres = new ArrayList<>();
 }
