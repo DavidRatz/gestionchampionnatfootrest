@@ -116,8 +116,8 @@ public class DatabaseFiller implements InitializingBean {
         for (int iJournee = 0; iJournee < nbJournee; iJournee++) {
             journee2Insert = Journee.builder()
                 .numero(iJournee+1)
-                .dateDebut(LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).plusDays(i))
-                .dateFin(LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).plusDays(i+2))
+                .dateDebut(LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).minusDays(i))
+                .dateFin(LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).minusDays(i+2))
                 .championnat(championnatRepo.findByPays("Belgique").get())
                 .build();
             journeeRepo.save(journee2Insert);

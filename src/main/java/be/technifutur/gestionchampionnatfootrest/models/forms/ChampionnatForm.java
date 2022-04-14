@@ -11,7 +11,7 @@ public class ChampionnatForm {
     private String nom;
     @NotNull
     @Size(min = 9, max = 9)
-    @Pattern(regexp = "[0-9]{4}/[0-9]{4}")
+    @Pattern(regexp = "[0-9]{4}-[0-9]{4}")
     private String saison;
     @Min(0)
     private int nbEquipes;
