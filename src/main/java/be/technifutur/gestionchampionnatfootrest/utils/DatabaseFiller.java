@@ -98,6 +98,9 @@ public class DatabaseFiller implements InitializingBean {
     }
 
     private void creationCalendrier(){
+        rencontreRepo.deleteAll();
+        journeeRepo.deleteAll();
+
         int nbClub = (int)clubRepo.count(); //4
         int nbJournee = (nbClub-1)*2; //6
         int nbRencontreByJournee = nbClub/2; //2
@@ -126,20 +129,16 @@ public class DatabaseFiller implements InitializingBean {
                     idClubVisiteur = Long.valueOf((nbClub-1));
                 else
                     idClubVisiteur = Long.valueOf(((nbClub-1) - iRencontreByJournee + iJournee) % (nbClub-1));
+                rencontre = Rencontre.builder()
+                    .date(LocalDateTime.of(journeeRepo.findByNumeroAndChampionnat(iJournee+1,1).get().getDateDebut(), LocalTime.of(20, 00)))
+                    .journee(journeeRepo.findByNumero(iJournee+1).get())
+                    .build();
                 if (iJournee < moitieRencontre) {
-                    rencontre = Rencontre.builder()
-                        .date(LocalDateTime.of(journeeRepo.findByNumeroAndChampionnat(iJournee+1,1).get().getDateDebut(), LocalTime.of(20, 00)))
-                        .clubDomicile(clubRepo.findById(idClubDomicile+1).get())
-                        .clubVisiteur(clubRepo.findById(idClubVisiteur+1).get())
-                        .journee(journeeRepo.findByNumero(iJournee+1).get())
-                        .build();
+                    rencontre.setClubDomicile(clubRepo.findById(idClubDomicile+1).get());
+                    rencontre.setClubVisiteur(clubRepo.findById(idClubVisiteur+1).get());
                 } else {
-                    rencontre = Rencontre.builder()
-                        .date(LocalDateTime.of(journeeRepo.findByNumeroAndChampionnat(iJournee+1,1).get().getDateDebut(), LocalTime.of(20, 00)))
-                        .clubDomicile(clubRepo.findById(idClubVisiteur+1).get())
-                        .clubVisiteur(clubRepo.findById(idClubDomicile+1).get())
-                        .journee(journeeRepo.findByNumero(iJournee+1).get())
-                        .build();
+                    rencontre.setClubDomicile(clubRepo.findById(idClubVisiteur+1).get());
+                    rencontre.setClubVisiteur(clubRepo.findById(idClubDomicile+1).get());
                 }
                 rencontreRepo.save(rencontre);
             }

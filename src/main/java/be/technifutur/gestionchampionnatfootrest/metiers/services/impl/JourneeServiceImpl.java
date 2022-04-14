@@ -7,17 +7,18 @@ import org.springframework.stereotype.Service;
 
 import be.technifutur.gestionchampionnatfootrest.data.repo.JourneeRepository;
 import be.technifutur.gestionchampionnatfootrest.metiers.services.GenericService;
+import be.technifutur.gestionchampionnatfootrest.metiers.services.JourneeService;
 import be.technifutur.gestionchampionnatfootrest.models.dtos.JourneeDTO;
 
 @Service
-public class JourneeServiceImpl implements GenericService<JourneeDTO> {
+public class JourneeServiceImpl implements GenericService<JourneeDTO>, JourneeService {
 
     @Autowired
     private JourneeRepository repository;
 
     @Override
-    public JourneeDTO getOne(Long id) {
-        return repository.findById(id)
+    public JourneeDTO getOneByNumeroAndChampionnat(int numero, int championnatId) {
+        return repository.findByNumeroAndChampionnat(numero,championnatId)
                 .map(JourneeDTO::of)
                 .orElseThrow();
     }
@@ -27,6 +28,20 @@ public class JourneeServiceImpl implements GenericService<JourneeDTO> {
         return repository.findAll().stream()
                 .map(JourneeDTO::of)
                 .toList();
+    }
+
+    @Override
+    public JourneeDTO getOne(Long id) {
+        return repository.findById(id)
+        .map(JourneeDTO::of)
+        .orElseThrow();
+    }
+
+    @Override
+    public JourneeDTO getOneByNumero(int numero) {
+        return repository.findByNumero(numero)
+        .map(JourneeDTO::of)
+        .orElseThrow();
     }
     
 }
