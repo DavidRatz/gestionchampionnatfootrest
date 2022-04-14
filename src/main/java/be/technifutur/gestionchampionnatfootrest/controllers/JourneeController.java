@@ -29,7 +29,7 @@ public class JourneeController {
     }
 
     @GetMapping("/{numero}/championnat/{championnatId}")
-    public JourneeDTO getOneByNumero(@PathVariable int numero, @PathVariable int championnatId){
+    public JourneeDTO getOneByNumero(@PathVariable int numero, @PathVariable Long championnatId){
         return service.getOneByNumeroAndChampionnat(numero, championnatId);
     }
 }

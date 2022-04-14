@@ -18,7 +18,7 @@ public class JourneeServiceImpl implements GenericService<JourneeDTO,JourneeForm
     private JourneeRepository repository;
 
     @Override
-    public JourneeDTO getOneByNumeroAndChampionnat(int numero, int championnatId) {
+    public JourneeDTO getOneByNumeroAndChampionnat(int numero, Long championnatId) {
         return repository.findByNumeroAndChampionnat(numero,championnatId)
                 .map(JourneeDTO::of)
                 .orElseThrow();

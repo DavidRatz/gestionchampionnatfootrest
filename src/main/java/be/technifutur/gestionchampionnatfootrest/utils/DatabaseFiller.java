@@ -37,8 +37,13 @@ public class DatabaseFiller implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        rencontreRepo.deleteAll();
+        journeeRepo.deleteAll();
+        clubRepo.deleteAll();
+        championnatRepo.deleteAll();
+        
         Championnat championnat = Championnat.builder()
-                        .id(1L)
+                        // .id(1L)
                         .nom("Jupiler pro league")
                         .nbEquipes(18)
                         .saison("2021-2022")
@@ -94,12 +99,11 @@ public class DatabaseFiller implements InitializingBean {
                 
         clubRepo.save(club);
 
-        creationCalendrier();
+       creationCalendrier();
     }
 
     private void creationCalendrier(){
-        rencontreRepo.deleteAll();
-        journeeRepo.deleteAll();
+       
 
         int nbClub = (int)clubRepo.count(); //4
         int nbJournee = (nbClub-1)*2; //6
@@ -130,7 +134,7 @@ public class DatabaseFiller implements InitializingBean {
                 else
                     idClubVisiteur = Long.valueOf(((nbClub-1) - iRencontreByJournee + iJournee) % (nbClub-1));
                 rencontre = Rencontre.builder()
-                    .date(LocalDateTime.of(journeeRepo.findByNumeroAndChampionnat(iJournee+1,1).get().getDateDebut(), LocalTime.of(20, 00)))
+                    .date(LocalDateTime.of(journeeRepo.findByNumeroAndChampionnat(iJournee+1,championnatRepo.findByPays("Belgique").get().getId()).get().getDateDebut(), LocalTime.of(20, 00)))
                     .journee(journeeRepo.findByNumero(iJournee+1).get())
                     .build();
                 if (iJournee < moitieRencontre) {
