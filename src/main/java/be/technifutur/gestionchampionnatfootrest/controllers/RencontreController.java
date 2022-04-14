@@ -2,6 +2,8 @@ package be.technifutur.gestionchampionnatfootrest.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import be.technifutur.gestionchampionnatfootrest.metiers.services.GenericService;
 import be.technifutur.gestionchampionnatfootrest.metiers.services.impl.RencontreServiceImpl;
 import be.technifutur.gestionchampionnatfootrest.models.dtos.RencontreDTO;
+import be.technifutur.gestionchampionnatfootrest.models.forms.RencontreForm;
 
 @RestController
 @RequestMapping("/rencontre")
@@ -25,5 +28,10 @@ public class RencontreController {
     @GetMapping
     public List<RencontreDTO> getAll(){
         return service.getAll();
+    }
+
+    @PatchMapping("/update/{id}")
+    public RencontreDTO update(@Valid @PathVariable Long id, @RequestBody RencontreForm form){
+        return service.update(id,form);
     }
 }

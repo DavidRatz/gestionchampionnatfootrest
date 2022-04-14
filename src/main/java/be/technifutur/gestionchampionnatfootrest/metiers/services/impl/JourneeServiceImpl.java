@@ -9,9 +9,10 @@ import be.technifutur.gestionchampionnatfootrest.data.repo.JourneeRepository;
 import be.technifutur.gestionchampionnatfootrest.metiers.services.GenericService;
 import be.technifutur.gestionchampionnatfootrest.metiers.services.JourneeService;
 import be.technifutur.gestionchampionnatfootrest.models.dtos.JourneeDTO;
+import be.technifutur.gestionchampionnatfootrest.models.forms.JourneeForm;
 
 @Service
-public class JourneeServiceImpl implements GenericService<JourneeDTO>, JourneeService {
+public class JourneeServiceImpl implements GenericService<JourneeDTO,JourneeForm>, JourneeService {
 
     @Autowired
     private JourneeRepository repository;
@@ -42,6 +43,25 @@ public class JourneeServiceImpl implements GenericService<JourneeDTO>, JourneeSe
         return repository.findByNumero(numero)
         .map(JourneeDTO::of)
         .orElseThrow();
+    }
+
+    @Override
+    public JourneeDTO insert(JourneeForm form) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public JourneeDTO update(Long id, JourneeForm form) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public JourneeDTO delete(Long id) {
+        JourneeDTO dto = getOne(id);
+        repository.deleteById(id);
+        return dto;
     }
     
 }
