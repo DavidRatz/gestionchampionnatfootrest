@@ -3,6 +3,7 @@ package be.technifutur.gestionchampionnatfootrest.models.dtos;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import be.technifutur.gestionchampionnatfootrest.models.entities.Championnat;
 import be.technifutur.gestionchampionnatfootrest.models.entities.Journee;
@@ -17,7 +18,7 @@ public class JourneeDTO implements Serializable {
     private final LocalDate dateDebut;
     private final LocalDate dateFin;
     private final ChampionnatDTO championnat;
-    //private final List<RencontreDTO> rencontres;
+    private final List<RencontreDTO> rencontres;
     
     public static JourneeDTO of(Journee journee){
         if( journee == null )
@@ -28,10 +29,10 @@ public class JourneeDTO implements Serializable {
             journee.getNumero(),
             journee.getDateDebut(),
             journee.getDateFin(),
-            ChampionnatDTO.of(journee.getChampionnat())//,
-            // journee.getRencontres() == null ? null : journee.getRencontres().stream()
-            //             .map(RencontreDTO::of)
-            //             .toList()
+            ChampionnatDTO.of(journee.getChampionnat()),
+            journee.getRencontres() == null ? null : journee.getRencontres().stream()
+                        .map(RencontreDTO::of)
+                        .toList()
         );
     }
 

@@ -22,8 +22,8 @@ public class ClubDTO implements Serializable {
     private final String nomStade;
     private final LocalDate dateCreation;
     private ChampionnatDTO championnat;
-    //private List<RencontreDTO> rencontresDomicile;
-    //private List<RencontreDTO> rencontresVisiteur;
+    private List<RencontreDTO> rencontresDomicile;
+    private List<RencontreDTO> rencontresVisiteur;
 
     public static ClubDTO of(Club entity){
         if( entity == null )
@@ -36,13 +36,13 @@ public class ClubDTO implements Serializable {
                 entity.getNomPresident(),
                 entity.getNomStade(),
                 entity.getDateCreation(),
-                ChampionnatDTO.of(entity.getChampionnat())//,
-                // entity.getRencontresDomicile() == null ? null : entity.getRencontresDomicile().stream()
-                //         .map(RencontreDTO::of)
-                //         .toList(),
-                // entity.getRencontresVisiteur() == null ? null : entity.getRencontresVisiteur().stream()
-                //         .map(RencontreDTO::of)
-                //         .toList()
+                ChampionnatDTO.of(entity.getChampionnat()),
+                entity.getRencontresDomicile() == null ? null : entity.getRencontresDomicile().stream()
+                        .map(RencontreDTO::of)
+                        .toList(),
+                entity.getRencontresVisiteur() == null ? null : entity.getRencontresVisiteur().stream()
+                        .map(RencontreDTO::of)
+                        .toList()
         );
     }
 

@@ -19,8 +19,8 @@ public class RencontreDTO implements Serializable {
     private final int scoreDomicile;
     private final int scoreVisiteur;
     private final JourneeDTO journee;
-    //private final ClubDTO clubDomicile;
-    //private final ClubDTO clubVisiteur;
+    private final ClubDTO clubDomicile;
+    private final ClubDTO clubVisiteur;
 
     public static RencontreDTO of(Rencontre rencontre ) {
         if( rencontre == null )
@@ -31,9 +31,9 @@ public class RencontreDTO implements Serializable {
             rencontre.getDate(),
             rencontre.getScoreDomicile(),
             rencontre.getScoreVisiteur(),
-            JourneeDTO.of(rencontre.getJournee())//,
-            //ClubDTO.of(rencontre.getClubDomicile()),
-            //ClubDTO.of(rencontre.getClubVisiteur())
+            JourneeDTO.of(rencontre.getJournee()),
+            ClubDTO.of(rencontre.getClubDomicile()),
+            ClubDTO.of(rencontre.getClubVisiteur())
         );
     }
 
