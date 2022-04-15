@@ -48,6 +48,7 @@ public class ClubDTO implements Serializable {
 
     @Data
     public static class ChampionnatDTO{
+        private final Long id;
         private final String nom;
         private final String saison;
         private final int nbEquipes;
@@ -58,6 +59,7 @@ public class ClubDTO implements Serializable {
                 return null;
 
             return new ChampionnatDTO(
+                championnat.getId(),
                 championnat.getNom(),
                 championnat.getSaison(),
                 championnat.getNbEquipes(),

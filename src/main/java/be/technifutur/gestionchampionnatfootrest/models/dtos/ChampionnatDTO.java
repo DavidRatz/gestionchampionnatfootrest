@@ -43,6 +43,7 @@ public class ChampionnatDTO implements Serializable {
 
     @Data
     public static class ClubDTO{
+        private final Long id;
         private final String nom;
         private final String pays;
         private final String nomPresident;
@@ -54,6 +55,7 @@ public class ChampionnatDTO implements Serializable {
                 return null;
     
             return new ClubDTO(
+                    entity.getId(),
                     entity.getNom(),
                     entity.getPays(),
                     entity.getNomPresident(),

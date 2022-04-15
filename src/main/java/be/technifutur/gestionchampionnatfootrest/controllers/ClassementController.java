@@ -1,10 +1,13 @@
 package be.technifutur.gestionchampionnatfootrest.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import be.technifutur.gestionchampionnatfootrest.data.repo.RencontreRepository;
 import be.technifutur.gestionchampionnatfootrest.models.dtos.ClassementDTO;
+import be.technifutur.gestionchampionnatfootrest.models.entities.Classement;
 
 @RestController
 @RequestMapping("/classement")
@@ -13,11 +16,13 @@ public class ClassementController {
     private RencontreRepository repository;
     
     @GetMapping("/{id}")
-    public ClassementDTO getScore(@PathVariable Long id){
-        int score = repository.getScoreByClub(id);
-        return ClassementDTO.builder()
-            .score(score)
-            .clubId(id)
-            .build();
+    public List<ClassementDTO> getScore(@PathVariable Long id){
+        List<ClassementDTO> classement = repository.getScoreByClub(id);
+        System.out.println(classement);
+        return classement;
+        // return ClassementDTO.builder()
+        //     .score(score)
+        //     .clubId(id)
+        //     .build();
     }
 }
