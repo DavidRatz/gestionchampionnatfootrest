@@ -5,6 +5,10 @@ import lombok.Data;
 
 public interface ClassementDTO {
     Long getId();
-    int getButmarque();
-    int getButencaisse();
+    int getMatchJoue();
+    int getVictoire();
+    int getNul();
+    int getDefaite();
+    String getBut();
+    int getPoints();
 }
