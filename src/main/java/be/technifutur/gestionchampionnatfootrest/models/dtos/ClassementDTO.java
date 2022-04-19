@@ -5,7 +5,7 @@ import lombok.Data;
 
 public interface ClassementDTO {
     Long getIdClub();
-    String getNomCLub();
+    String getNomClub();
     int getMatchJoue();
     int getVictoire();
     int getNul();

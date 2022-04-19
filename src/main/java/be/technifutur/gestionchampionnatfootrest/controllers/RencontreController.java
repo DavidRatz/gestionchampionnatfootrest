@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 //import be.technifutur.gestionchampionnatfootrest.metiers.services.RencontreService;
@@ -31,6 +32,7 @@ public class RencontreController {
     }
 
     @PatchMapping("/update/{id}")
+    @PreAuthorize("isAuthenticated()")
     public RencontreDTO update(@PathVariable Long id, @Valid @RequestBody RencontreForm form){
         return service.update(id,form);
     }

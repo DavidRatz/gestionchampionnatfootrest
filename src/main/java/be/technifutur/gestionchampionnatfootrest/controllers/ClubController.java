@@ -3,6 +3,7 @@ package be.technifutur.gestionchampionnatfootrest.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import be.technifutur.gestionchampionnatfootrest.metiers.services.ClubService;
@@ -18,11 +19,13 @@ public class ClubController {
     private ClubServiceImpl service;
 
     @GetMapping("/{id}")
+    @PreAuthorize("permitAll()")
     public ClubDTO getOne(@PathVariable Long id){
         return service.getOne(id);
     }
 
     @GetMapping
+    @PreAuthorize("permitAll()")
     public List<ClubDTO> getAll(){
         return service.getAll();
     }

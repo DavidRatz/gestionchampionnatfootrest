@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 //import be.technifutur.gestionchampionnatfootrest.metiers.services.JourneeService;
@@ -24,11 +25,13 @@ public class JourneeController {
     }
 
     @GetMapping("/{numero}")
+    @PreAuthorize("permitAll()")
     public JourneeDTO getOneByNumero(@PathVariable int numero){
         return service.getOneByNumero(numero);
     }
 
     @GetMapping("/{numero}/championnat/{championnatId}")
+    @PreAuthorize("permitAll()")
     public JourneeDTO getOneByNumero(@PathVariable int numero, @PathVariable Long championnatId){
         return service.getOneByNumeroAndChampionnat(numero, championnatId);
     }

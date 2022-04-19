@@ -12,16 +12,19 @@ import java.util.List;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import be.technifutur.gestionchampionnatfootrest.data.repo.ChampionnatRepository;
 import be.technifutur.gestionchampionnatfootrest.data.repo.ClubRepository;
 import be.technifutur.gestionchampionnatfootrest.data.repo.JourneeRepository;
 import be.technifutur.gestionchampionnatfootrest.data.repo.RencontreRepository;
+import be.technifutur.gestionchampionnatfootrest.data.repo.UtilisateurRepository;
 import be.technifutur.gestionchampionnatfootrest.models.entities.Championnat;
 import be.technifutur.gestionchampionnatfootrest.models.entities.Club;
 import be.technifutur.gestionchampionnatfootrest.models.entities.Journee;
 import be.technifutur.gestionchampionnatfootrest.models.entities.Rencontre;
+import be.technifutur.gestionchampionnatfootrest.models.entities.Utilisateur;
 
 @Component
 public class DatabaseFiller implements InitializingBean {
@@ -34,6 +37,10 @@ public class DatabaseFiller implements InitializingBean {
     private JourneeRepository journeeRepo;
     @Autowired
     private RencontreRepository rencontreRepo;
+    @Autowired
+    private UtilisateurRepository uRepo;
+    @Autowired
+    private PasswordEncoder encoder;
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -41,6 +48,7 @@ public class DatabaseFiller implements InitializingBean {
         journeeRepo.deleteAll();
         clubRepo.deleteAll();
         championnatRepo.deleteAll();
+        uRepo.deleteAll();
         
         Championnat championnat = Championnat.builder()
                         // .id(1L)
@@ -99,6 +107,20 @@ public class DatabaseFiller implements InitializingBean {
                 
         clubRepo.save(club);
 
+        Utilisateur user = new Utilisateur();
+        user.setUsername("admin");
+        user.setPassword(encoder.encode("pass"));
+        user.setRoles(List.of("ROLE_ADMIN"));
+
+        uRepo.save(user);
+
+        user = new Utilisateur();
+        user.setUsername("user");
+        user.setPassword(encoder.encode("pass"));
+        user.setRoles(List.of("ROLE_USER"));
+
+        uRepo.save(user);
+
        creationCalendrier();
     }
 
@@ -120,8 +142,8 @@ public class DatabaseFiller implements InitializingBean {
         for (int iJournee = 0; iJournee < nbJournee; iJournee++) {
             journee2Insert = Journee.builder()
                 .numero(iJournee+1)
-                .dateDebut(LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).minusDays(i))
-                .dateFin(LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).minusDays(i+2))
+                .dateDebut(LocalDate.now().minusWeeks(2).with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).plusDays(i))
+                .dateFin(LocalDate.now().minusWeeks(2).with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).plusDays(i+2))
                 .championnat(championnatRepo.findByPays("Belgique").get())
                 .build();
             journeeRepo.save(journee2Insert);
