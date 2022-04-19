@@ -15,9 +15,9 @@ public class ClassementController {
     @Autowired
     private RencontreRepository repository;
     
-    @GetMapping("/{id}")
-    public List<ClassementDTO> getScore(@PathVariable Long id){
-        List<ClassementDTO> classement = repository.getScoreByClub(id);
+    @GetMapping("/{idChampionnat}")
+    public List<ClassementDTO> getScore(@PathVariable Long idChampionnat){
+        List<ClassementDTO> classement = repository.getClassementByChampionnat(idChampionnat);
         System.out.println(classement);
         return classement;
         // return ClassementDTO.builder()

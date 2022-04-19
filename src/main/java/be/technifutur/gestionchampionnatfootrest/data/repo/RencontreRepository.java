@@ -10,6 +10,6 @@ import be.technifutur.gestionchampionnatfootrest.models.entities.Classement;
 import be.technifutur.gestionchampionnatfootrest.models.entities.Rencontre;
 
 public interface RencontreRepository extends JpaRepository<Rencontre,Long> {
-    @Query(value = "CALL get_all_classement();", nativeQuery = true)
-    List<ClassementDTO> getScoreByClub(Long clubId);
+    @Query(value = "CALL get_all_classement(?1);", nativeQuery = true)
+    List<ClassementDTO> getClassementByChampionnat(Long idChampionnat);
 }
