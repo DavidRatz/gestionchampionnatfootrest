@@ -54,5 +54,11 @@ public class RencontreServiceImpl implements GenericService<RencontreDTO, Rencon
         repository.deleteById(id);
         return dto;
     }
+
+    public List<RencontreDTO> getRencontresByClub(Long id) {
+        return repository.findRencontresByClub(id).stream()
+        .map(RencontreDTO::of)
+        .toList();
+    }
     
 }
