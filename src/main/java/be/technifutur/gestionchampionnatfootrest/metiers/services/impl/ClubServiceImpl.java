@@ -22,7 +22,7 @@ public class ClubServiceImpl implements GenericService<ClubDTO, ClubForm>, ClubS
     public ClubDTO getOne(Long id) {
         return repository.findById(id)
                 .map(ClubDTO::of)
-                .orElseThrow(() -> new ElementNotFoundException(id, ClubDTO.class));
+                .orElseThrow(   );
     }
 
     @Override

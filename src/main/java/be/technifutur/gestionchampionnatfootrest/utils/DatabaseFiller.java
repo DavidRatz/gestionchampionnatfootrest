@@ -6,9 +6,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,7 +89,7 @@ public class DatabaseFiller implements InitializingBean {
                 .id(3L)
                 .nom("Club Brugge KV")
                 .nomPresident("Bart Verhaeghe")
-                .nomStade("Jan-Breyel Stadium")
+                .nomStade("Jan-Breydel Stadium")
                 .dateCreation(LocalDate.of(1891, Month.NOVEMBER, 1))
                 .pays("Belgique")
                 .championnat(championnat)
@@ -105,6 +107,175 @@ public class DatabaseFiller implements InitializingBean {
                 .championnat(championnat)
                 .build();
                 
+        clubRepo.save(club);
+
+        club = Club.builder()
+                .id(5L)
+                .nom("Union Saint-Gilloise")
+                .nomPresident("Alex Muzio")
+                .nomStade("Stade Joseph Marien")
+                .dateCreation(LocalDate.of(1897, Month.NOVEMBER, 1))
+                .pays("Belgique")
+                .championnat(championnat)
+                .build();
+
+        clubRepo.save(club);
+
+        club = Club.builder()
+                .id(6L)
+                .nom("Royal Antwerp")
+                .nomPresident("Paul Gheysens")
+                .nomStade("Bosuilstadion")
+                .dateCreation(LocalDate.of(1880, Month.JANUARY, 1))
+                .pays("Belgique")
+                .championnat(championnat)
+                .build();
+
+        clubRepo.save(club);
+
+        club = Club.builder()
+                .id(7L)
+                .nom("KAA Gent")
+                .nomPresident("Ivan De Witte")
+                .nomStade("Ghelamco Arena")
+                .dateCreation(LocalDate.of(1900, Month.OCTOBER, 31))
+                .pays("Belgique")
+                .championnat(championnat)
+                .build();
+
+        clubRepo.save(club);
+
+        club = Club.builder()
+                .id(8L)
+                .nom("Mechelen")
+                .nomPresident("Dieter Pienninckx")
+                .nomStade("Stade AFAS")
+                .dateCreation(LocalDate.of(1904, Month.JANUARY, 1))
+                .pays("Belgique")
+                .championnat(championnat)
+                .build();
+
+        clubRepo.save(club);
+
+        club = Club.builder()
+                .id(9L)
+                .nom("KRC Genk")
+                .nomPresident("Peter Croonen")
+                .nomStade("Luminus Arena")
+                .dateCreation(LocalDate.of(1923, Month.JANUARY, 1))
+                .pays("Belgique")
+                .championnat(championnat)
+                .build();
+
+        clubRepo.save(club);
+
+        club = Club.builder()
+                .id(10L)
+                .nom("Saint Trond VV")
+                .nomPresident("David Meekers")
+                .nomStade("Stayen")
+                .dateCreation(LocalDate.of(1924, Month.FEBRUARY, 23))
+                .pays("Belgique")
+                .championnat(championnat)
+                .build();
+
+        clubRepo.save(club);
+
+        club = Club.builder()
+                .id(11L)
+                .nom("Cercle Bruges")
+                .nomPresident("Vincent Goemare")
+                .nomStade("Jan-Breydel Stadium")
+                .dateCreation(LocalDate.of(1899, Month.APRIL, 9))
+                .pays("Belgique")
+                .championnat(championnat)
+                .build();
+
+        clubRepo.save(club);
+
+        club = Club.builder()
+                .id(12L)
+                .nom("OH Louvain")
+                .nomPresident("Chris Vandebroeck")
+                .nomStade("King Power at Den Dreef Stadion")
+                .dateCreation(LocalDate.of(1957, Month.JANUARY, 1))
+                .pays("Belgique")
+                .championnat(championnat)
+                .build();
+
+        clubRepo.save(club);
+
+        club = Club.builder()
+                .id(13L)
+                .nom("KV Ostende")
+                .nomPresident("Gauthier Ganaye")
+                .nomStade("Versluys Arena")
+                .dateCreation(LocalDate.of(1905, Month.OCTOBER, 1))
+                .pays("Belgique")
+                .championnat(championnat)
+                .build();
+
+        clubRepo.save(club);
+
+
+        club = Club.builder()
+                .id(14L)
+                .nom("KV Courtrai")
+                .nomPresident("Ronny Verhelst")
+                .nomStade("Stade des Éperons d'or")
+                .dateCreation(LocalDate.of(1901, Month.MARCH, 14))
+                .pays("Belgique")
+                .championnat(championnat)
+                .build();
+
+        clubRepo.save(club);
+
+        club = Club.builder()
+                .id(15L)
+                .nom("KAS Eupen")
+                .nomPresident("Tariq Abdulaziz Al Naama")
+                .nomStade("Stade du Kehrweg")
+                .dateCreation(LocalDate.of(1945, Month.JULY, 9))
+                .pays("Belgique")
+                .championnat(championnat)
+                .build();
+
+        clubRepo.save(club);
+
+        club = Club.builder()
+                .id(16L)
+                .nom("Zulte Waregem")
+                .nomPresident("Carl Ballière")
+                .nomStade("Stade Arc-en-ciel")
+                .dateCreation(LocalDate.of(1935, Month.SEPTEMBER, 25))
+                .pays("Belgique")
+                .championnat(championnat)
+                .build();
+
+        clubRepo.save(club);
+
+        club = Club.builder()
+                .id(17L)
+                .nom("RFC Seraing")
+                .nomPresident("Bernard Serin")
+                .nomStade("Stade du Pairay")
+                .dateCreation(LocalDate.of(1922, Month.JANUARY, 1))
+                .pays("Belgique")
+                .championnat(championnat)
+                .build();
+
+        clubRepo.save(club);
+
+        club = Club.builder()
+                .id(18L)
+                .nom("Beerschot VA")
+                .nomPresident("Abdullah bin Musaid Al Saud")
+                .nomStade("Stade olympique d'Anvers")
+                .dateCreation(LocalDate.of(1921, Month.JANUARY, 1))
+                .pays("Belgique")
+                .championnat(championnat)
+                .build();
+
         clubRepo.save(club);
 
         Utilisateur user = new Utilisateur();
@@ -140,15 +311,20 @@ public class DatabaseFiller implements InitializingBean {
         int i =0;
 
         for (int iJournee = 0; iJournee < nbJournee; iJournee++) {
+            LocalDate dateDebut = LocalDate.now().minusWeeks(2).with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).plusDays(i);
+            LocalDate dateFin = LocalDate.now().minusWeeks(2).with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).plusDays(i+2);
             journee2Insert = Journee.builder()
                 .numero(iJournee+1)
-                .dateDebut(LocalDate.now().minusWeeks(2).with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).plusDays(i))
-                .dateFin(LocalDate.now().minusWeeks(2).with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).plusDays(i+2))
+                .dateDebut(dateDebut)
+                .dateFin(dateFin)
                 .championnat(championnatRepo.findByPays("Belgique").get())
                 .build();
             journeeRepo.save(journee2Insert);
             i+=7;
+
+            
             for (int iRencontreByJournee = 0; iRencontreByJournee < nbRencontreByJournee; iRencontreByJournee++) {
+                int days = Math.toIntExact(ChronoUnit.DAYS.between(dateDebut, dateFin));
                 Long idClubDomicile = Long.valueOf((iJournee + iRencontreByJournee) % (nbClub-1));
                 Long idClubVisiteur = null;
                 if(iRencontreByJournee == 0)
@@ -156,7 +332,7 @@ public class DatabaseFiller implements InitializingBean {
                 else
                     idClubVisiteur = Long.valueOf(((nbClub-1) - iRencontreByJournee + iJournee) % (nbClub-1));
                 rencontre = Rencontre.builder()
-                    .date(LocalDateTime.of(journeeRepo.findByNumeroAndChampionnat(iJournee+1,championnatRepo.findByPays("Belgique").get().getId()).get().getDateDebut(), LocalTime.of(20, 00)))
+                    .date(LocalDateTime.of(dateDebut, LocalTime.of(20, 00)).plusDays(ThreadLocalRandom.current().nextInt(days+1)))
                     .journee(journeeRepo.findByNumero(iJournee+1).get())
                     .build();
                 if (iJournee < moitieRencontre) {
