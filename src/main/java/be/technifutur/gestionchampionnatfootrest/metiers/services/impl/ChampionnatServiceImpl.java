@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import be.technifutur.gestionchampionnatfootrest.data.repo.*;
+import be.technifutur.gestionchampionnatfootrest.exceptions.ElementNotFoundException;
 import be.technifutur.gestionchampionnatfootrest.metiers.services.GenericService;
 import be.technifutur.gestionchampionnatfootrest.models.dtos.ChampionnatDTO;
 import be.technifutur.gestionchampionnatfootrest.models.entities.*;
@@ -25,7 +26,7 @@ public class ChampionnatServiceImpl implements GenericService<ChampionnatDTO,Cha
     public ChampionnatDTO getOne(Long id) {
         return repository.findById(id)
                 .map(ChampionnatDTO::of)
-                .orElseThrow();
+                .orElseThrow(() -> new ElementNotFoundException(id, ChampionnatDTO.class));
     }
 
     @Override

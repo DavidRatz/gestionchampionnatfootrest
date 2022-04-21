@@ -3,6 +3,7 @@ package be.technifutur.gestionchampionnatfootrest.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,8 @@ public class ClubController {
 
     @GetMapping("/{id}")
     @PreAuthorize("permitAll()")
-    public ClubDTO getOne(@PathVariable Long id){
-        return service.getOne(id);
+    public ResponseEntity<ClubDTO> getOne(@PathVariable Long id){
+        return  ResponseEntity.ok(service.getOne(id));
     }
 
     @GetMapping
