@@ -31,12 +31,6 @@ public class RencontreController {
         return service.getAll();
     }
 
-    @GetMapping("/club/{id}")
-    @PreAuthorize("permitAll()")
-    public List<RencontreDTO> getRencontresOfClub(@PathVariable Long id){
-        return service.getRencontresByClub(id);
-    }
-
     @PatchMapping("/update/{id}")
     @PreAuthorize("isAuthenticated()")
     public RencontreDTO update(@PathVariable Long id, @Valid @RequestBody RencontreForm form){

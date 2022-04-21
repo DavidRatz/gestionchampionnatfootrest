@@ -73,6 +73,9 @@ public class ClubDTO implements Serializable {
         private final LocalDateTime date;
         private final int scoreDomicile;
         private final int scoreVisiteur;
+        private final ClubRencontreDTO clubDomicile;
+        private final ClubRencontreDTO clubVisiteur;
+
         public static RencontreDTO of(Rencontre rencontre) {
             if( rencontre == null )
                 return null;
@@ -80,7 +83,22 @@ public class ClubDTO implements Serializable {
             return new RencontreDTO(
                 rencontre.getDate(),
                 rencontre.getScoreDomicile(),
-                rencontre.getScoreVisiteur()
+                rencontre.getScoreVisiteur(),
+                ClubRencontreDTO.of(rencontre.getClubDomicile()),
+                ClubRencontreDTO.of(rencontre.getClubVisiteur())
+            );
+        }
+    }
+
+    @Data
+    public static class ClubRencontreDTO{
+        private final String nom;
+        public static ClubRencontreDTO of(Club entity){
+            if( entity == null )
+                return null;
+    
+            return new ClubRencontreDTO(
+                    entity.getNom()
             );
         }
     }
